@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0E6E5C">
+<title>المفردات — English for Non-Specialists · الفرقة الرابعة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ MOBILE FIRST ============ */
+  :root{
+    --green:#0E6E5C;
+    --green-700:#0b5a4b;
+    --green-50:#e7f3f0;
+    --green-100:#d3e9e3;
+    --ink:#15201d;
+    --muted:#5d6b67;
+    --bg:#f4f7f6;
+    --card:#ffffff;
+    --line:#e2e9e7;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(14,110,92,.06), 0 10px 30px rgba(14,110,92,.08);
+    --font-ar:"IBM Plex Sans Arabic","Segoe UI","Tahoma",sans-serif;
+    --font-en:"Inter","Segoe UI","Helvetica Neue",Arial,sans-serif;
+    --topbar-h:58px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-ar);line-height:1.65;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  .wrap{width:100%;margin:0 auto;padding:0 14px 56px;}
+
+  /* top bar */
+  .topbar{position:sticky;top:0;z-index:30;background:var(--green);color:#fff;box-shadow:0 2px 14px rgba(11,90,75,.25);padding-top:env(safe-area-inset-top);}
+  .topbar-inner{margin:0 auto;padding:10px 14px;display:flex;align-items:center;gap:10px;}
+  .mark{width:36px;height:36px;border-radius:50%;background:#fff;color:var(--green);display:grid;place-items:center;font-weight:700;font-size:20px;flex:0 0 auto;}
+  .topbar h1{font-size:15px;margin:0;font-weight:700;line-height:1.3;}
+  .topbar .sub{font-size:11px;opacity:.85;font-weight:400;}
+
+  /* hero */
+  header.hero{text-align:center;padding:28px 12px 22px;}
+  header.hero .badge{display:inline-block;font-size:11px;font-weight:700;color:var(--green-700);background:var(--green-100);padding:5px 12px;border-radius:999px;margin-bottom:12px;}
+  header.hero h2{font-size:24px;margin:0 0 8px;font-weight:700;letter-spacing:-.01em;}
+  header.hero p{margin:0 auto;max-width:560px;color:var(--muted);font-size:14px;}
+  header.hero .stat{margin-top:14px;font-size:12px;color:var(--green-700);font-weight:700;}
+
+  /* search + chips */
+  .search-wrap{position:sticky;top:var(--topbar-h);z-index:20;padding:10px 0 8px;background:linear-gradient(var(--bg) 76%, rgba(244,247,246,0));}
+  .search{width:100%;padding:13px 16px;font-size:16px;font-family:var(--font-ar);border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);box-shadow:var(--shadow);}
+  .search::placeholder{color:#9aa6a3;}
+  .search:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px var(--green-50);}
+
+  .chips{display:flex;flex-wrap:nowrap;gap:8px;margin-top:10px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .chips::-webkit-scrollbar{display:none;}
+  .chips a{text-decoration:none;font-size:13px;font-weight:600;color:var(--green-700);background:var(--card);border:1px solid var(--line);padding:8px 14px;border-radius:999px;transition:.15s;white-space:nowrap;flex:0 0 auto;}
+  .chips a:active{background:var(--green);color:#fff;border-color:var(--green);}
+
+  /* unit cards */
+  section.unit{margin-top:22px;scroll-margin-top:120px;}
+  .unit-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
+  .unit-head{display:flex;align-items:center;gap:10px;padding:14px 16px;background:linear-gradient(135deg,var(--green),var(--green-700));color:#fff;}
+  .unit-head .pill{font-size:11px;font-weight:700;letter-spacing:.03em;background:rgba(255,255,255,.18);padding:4px 10px;border-radius:8px;flex:0 0 auto;}
+  .unit-head h3{margin:0;font-size:16px;font-weight:700;line-height:1.3;}
+  .unit-head .en{font-size:11px;opacity:.85;font-weight:400;display:block;}
+  .unit-head .count{margin-inline-start:auto;font-size:11px;opacity:.9;flex:0 0 auto;}
+
+  /* MOBILE: tables render as stacked rows. Hide header row, turn each row into a block. */
+  table{width:100%;border-collapse:collapse;display:block;}
+  thead{display:none;}
+  tbody{display:block;}
+  tbody tr{display:block;padding:14px 16px;border-bottom:1px solid var(--line);}
+  tbody tr:last-child{border-bottom:none;}
+  tbody tr:nth-child(even){background:#fafcfb;}
+  tbody td{display:block;padding:0;border:none;font-size:15px;}
+  /* label each cell using its column meaning */
+  tbody td::before{display:block;font-family:var(--font-ar);font-size:11px;font-weight:600;color:var(--green);margin-bottom:1px;}
+  td.word{direction:ltr;text-align:left;font-family:var(--font-en);font-weight:700;color:var(--green);font-size:19px;line-height:1.25;}
+  td.word::before{content:none;}
+  td.ar-trans{font-weight:700;color:var(--ink);margin-top:8px;}
+  td.ar-trans::before{content:"الترجمة";}
+  td.ar-mean{color:var(--muted);font-size:14px;margin-top:8px;}
+  td.ar-mean::before{content:"المعنى بالعربي";}
+  td.en-mean{direction:ltr;text-align:left;font-family:var(--font-en);color:var(--muted);font-size:14px;margin-top:8px;}
+  td.en-mean::before{content:"English";font-family:var(--font-en);text-align:left;}
+
+  .noresult{display:none;text-align:center;color:var(--muted);padding:40px 16px;font-size:15px;}
+  footer{margin-top:34px;text-align:center;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:18px;}
+  footer .mark{display:inline-grid;width:32px;height:32px;font-size:17px;background:var(--green-50);color:var(--green);margin-bottom:8px;}
+
+  /* ============ TABLET (>=640px) ============ */
+  @media (min-width:640px){
+    .wrap{padding:0 18px 64px;}
+    .topbar-inner{padding:12px 18px;gap:12px;}
+    .mark{width:40px;height:40px;font-size:22px;}
+    .topbar h1{font-size:17px;}
+    .topbar .sub{font-size:12px;}
+    header.hero{padding:38px 16px 28px;}
+    header.hero h2{font-size:30px;}
+    header.hero p{font-size:15px;}
+    .chips{flex-wrap:wrap;overflow:visible;}
+    .chips a:hover{background:var(--green);color:#fff;border-color:var(--green);}
+    .unit-head{padding:18px 20px;gap:14px;}
+    .unit-head h3{font-size:19px;}
+    .unit-head .pill,.unit-head .en,.unit-head .count{font-size:12px;}
+  }
+
+  /* ============ DESKTOP (>=860px): real table layout ============ */
+  @media (min-width:860px){
+    .wrap{max-width:1080px;}
+    table{display:table;}
+    thead{display:table-header-group;}
+    thead th{background:var(--green-50);color:var(--green-700);font-size:12px;font-weight:700;letter-spacing:.02em;padding:11px 16px;text-align:right;border-bottom:1px solid var(--line);}
+    thead th.en-col{direction:ltr;text-align:left;}
+    tbody{display:table-row-group;}
+    tbody tr{display:table-row;padding:0;}
+    tbody tr:hover{background:var(--green-50);}
+    tbody td{display:table-cell;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;margin:0;}
+    tbody td::before{content:none !important;}
+    td.word{font-size:15px;white-space:nowrap;width:16%;}
+    td.ar-trans{width:18%;margin:0;}
+    td.ar-mean{width:33%;margin:0;}
+    td.en-mean{margin:0;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="mark">ع</div>
+      <div>
+        <h1>English Course — المفردات</h1>
+        <span class="sub">Al-Azhar University · الفرقة الرابعة</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <header class="hero">
+      <span class="badge">شرح تفاعلي · قائمة المفردات</span>
+      <h2>مفردات المقرر كاملةً</h2>
+      <p>جميع كلمات الـ Vocabulary من المقرر مع الترجمة العربية والمعنى بالعربي والمعنى بالإنجليزي، مرتّبة حسب كل وحدة.</p>
+      <div class="stat">٥٧ كلمة · الوحدات ١–٥ والوحدة ١٩</div>
+    </header>
+
+    <div class="search-wrap">
+      <input type="text" class="search" id="search" placeholder="ابحث عن أي كلمة أو معنى…" aria-label="بحث">
+      <nav class="chips">
+        <a href="#u1">الوحدة ١</a>
+        <a href="#u2">الوحدة ٢</a>
+        <a href="#u3">الوحدة ٣</a>
+        <a href="#u4">الوحدة ٤</a>
+        <a href="#u5">الوحدة ٥</a>
+        <a href="#u19">الوحدة ١٩ — سيبويه</a>
+      </nav>
+    </div>
+
+    <p class="noresult" id="noresult">لا توجد كلمات مطابقة للبحث.</p>
+
+    <section class="unit" id="u1">
+      <div class="unit-card">
+        <div class="unit-head">
+          <span class="pill">الوحدة ١</span>
+          <div><h3>الزواج: نواة الأسرة<span class="en">Marriage: The Nucleus of Family</span></h3></div>
+          <span class="count">١٠ كلمات</span>
+        </div>
+        <table>
+          <thead><tr><th class="en-col">Word</th><th>الترجمة</th><th>المعنى بالعربي</th><th class="en-col">English Meaning</th></tr></thead>
+          <tbody>
+            <tr><td class="word">Shield</td><td class="ar-trans">دِرع / واقٍ</td><td class="ar-mean">شيء يحمي الشخص أو الشيء من الأذى أو الضرر</td><td class="en-mean">Something that protects a person or thing from harm or damage.</td></tr>
+            <tr><td class="word">Constant</td><td class="ar-trans">مستمر / دائم</td><td class="ar-mean">يحدث بانتظام أو طوال الوقت</td><td class="en-mean">Happening regularly or all the time.</td></tr>
+            <tr><td class="word">Interdependence</td><td class="ar-trans">الاعتماد المتبادل</td><td class="ar-mean">حالة يعتمد فيها الناس أو الأشياء على بعضهم البعض</td><td class="en-mean">A situation in which people or things depend on each other.</td></tr>
+            <tr><td class="word">Complementary</td><td class="ar-trans">مُكمِّل / متكامل</td><td class="ar-mean">أشياء تتلاءم معاً رغم اختلافها عادةً</td><td class="en-mean">Things that go well together, although they are usually different.</td></tr>
+            <tr><td class="word">Tremendous</td><td class="ar-trans">هائل / ضخم</td><td class="ar-mean">كبير جداً أو سريع أو قوي جداً</td><td class="en-mean">Very big, fast, or powerful.</td></tr>
+            <tr><td class="word">Indifference</td><td class="ar-trans">لامبالاة</td><td class="ar-mean">عدم الاهتمام أو الانشغال</td><td class="en-mean">Lack of interest or concern.</td></tr>
+            <tr><td class="word">Consultation</td><td class="ar-trans">تشاوُر / استشارة</td><td class="ar-mean">نقاش يُتيح لمن يتأثرون بأمر ما أن يبدوا آراءهم</td><td class="en-mean">Discussion in which people affected by or involved in something can give their opinions.</td></tr>
+            <tr><td class="word">Cornerstone</td><td class="ar-trans">حجر الأساس</td><td class="ar-mean">شيء بالغ الأهمية يعتمد عليه كل ما عداه</td><td class="en-mean">Something extremely important because everything else depends on it.</td></tr>
+            <tr><td class="word">Identical</td><td class="ar-trans">متطابق</td><td class="ar-mean">مماثل تماماً أو متشابه جداً</td><td class="en-mean">Exactly the same, or very similar.</td></tr>
+            <tr><td class="word">Affection</td><td class="ar-trans">مودّة / حنان</td><td class="ar-mean">شعور بالإعجاب أو الحب والرعاية</td><td class="en-mean">A feeling of liking or love and caring.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="unit" id="u2">
+      <div class="unit-card">
+        <div class="unit-head">
+          <span class="pill">الوحدة ٢</span>
+          <div><h3>الزواج كمؤسسة إسلامية<span class="en">Marriage as an Islamic Institution</span></h3></div>
+          <span class="count">١٠ كلمات</span>
+        </div>
+        <table>
+          <thead><tr><th class="en-col">Word</th><th>الترجمة</th><th>المعنى بالعربي</th><th class="en-col">English Meaning</th></tr></thead>
+          <tbody>
+            <tr><td class="word">Reconciliation</td><td class="ar-trans">مُصالحة</td><td class="ar-mean">عودة شخصين أو دولتين للصداقة بعد الخلاف</td><td class="en-mean">A situation in which two people, countries, etc. become friendly again after quarrelling.</td></tr>
+            <tr><td class="word">Essential</td><td class="ar-trans">أساسي / ضروري</td><td class="ar-mean">مهم وضروري للغاية</td><td class="en-mean">Extremely important and necessary.</td></tr>
+            <tr><td class="word">Guardian</td><td class="ar-trans">وَلِيّ / وصِيّ</td><td class="ar-mean">المسؤول قانونياً عن رعاية طفل غيره، خاصة بعد وفاة والديه</td><td class="en-mean">Someone legally responsible for looking after another's child, especially after the child's parents have died.</td></tr>
+            <tr><td class="word">Justification</td><td class="ar-trans">تبرير / مسوّغ</td><td class="ar-mean">سبب جيد ومقبول لفعل شيء ما</td><td class="en-mean">A good and acceptable reason for doing something.</td></tr>
+            <tr><td class="word">Resort</td><td class="ar-trans">اللجوء (إلى)</td><td class="ar-mean">الاضطرار إلى استخدام شيء لعدم توفر ما هو أفضل</td><td class="en-mean">When you must use or depend on something because nothing better is available.</td></tr>
+            <tr><td class="word">Consent</td><td class="ar-trans">موافقة / إذن</td><td class="ar-mean">الإذن بفعل شيء ما</td><td class="en-mean">Permission to do something.</td></tr>
+            <tr><td class="word">Enmity</td><td class="ar-trans">عداوة</td><td class="ar-mean">شعور بالكراهية تجاه شخص ما</td><td class="en-mean">A feeling of hatred towards someone.</td></tr>
+            <tr><td class="word">Reject</td><td class="ar-trans">يرفض</td><td class="ar-mean">رفض قبول شيء أو تصديقه أو الموافقة عليه</td><td class="en-mean">To refuse to accept, believe in, or agree with something.</td></tr>
+            <tr><td class="word">Withdraw</td><td class="ar-trans">يسحب / ينسحب</td><td class="ar-mean">التوقف عن المشاركة في نشاط أو الانتماء لمنظمة</td><td class="en-mean">To stop taking part in an activity or belonging to an organization, or to make someone do this.</td></tr>
+            <tr><td class="word">Disruption</td><td class="ar-trans">تعطيل / اضطراب</td><td class="ar-mean">حالة يُمنع فيها استمرار شيء بطريقته المعتادة</td><td class="en-mean">A situation in which something is prevented from continuing in its usual way.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="unit" id="u3">
+      <div class="unit-card">
+        <div class="unit-head">
+          <span class="pill">الوحدة ٣</span>
+          <div><h3>العلاقة بين الآباء والأبناء (١)<span class="en">Parent-Child Relationship 1</span></h3></div>
+          <span class="count">١٠ كلمات</span>
+        </div>
+        <table>
+          <thead><tr><th class="en-col">Word</th><th>الترجمة</th><th>المعنى بالعربي</th><th class="en-col">English Meaning</th></tr></thead>
+          <tbody>
+            <tr><td class="word">Advocate</td><td class="ar-trans">يدعو إلى / يؤيّد</td><td class="ar-mean">تأييد طريقة معينة لفعل شيء علناً</td><td class="en-mean">To publicly support a particular way of doing something.</td></tr>
+            <tr><td class="word">Moderate</td><td class="ar-trans">معتدل</td><td class="ar-mean">ليس كبيراً جداً ولا صغيراً جداً، ولا حاراً ولا بارداً جداً</td><td class="en-mean">Not very large or very small, very hot or very cold, very fast or very slow.</td></tr>
+            <tr><td class="word">Stability</td><td class="ar-trans">استقرار</td><td class="ar-mean">حالة الثبات وعدم التغيّر</td><td class="en-mean">The condition of being steady and not changing.</td></tr>
+            <tr><td class="word">Privilege</td><td class="ar-trans">امتياز / ميزة</td><td class="ar-mean">ميزة خاصة تُمنح لشخص أو مجموعة فقط</td><td class="en-mean">A special advantage given only to one person or group of people.</td></tr>
+            <tr><td class="word">Maturity</td><td class="ar-trans">نضج</td><td class="ar-mean">التصرف بطريقة عاقلة كالبالغين</td><td class="en-mean">The quality of behaving in a sensible way like an adult.</td></tr>
+            <tr><td class="word">Financial</td><td class="ar-trans">مالي</td><td class="ar-mean">متعلق بالمال أو إدارته</td><td class="en-mean">Relating to money or the management of money.</td></tr>
+            <tr><td class="word">Lenient</td><td class="ar-trans">متساهل / متسامح</td><td class="ar-mean">غير صارم في العقاب أو في المستوى المتوقَّع</td><td class="en-mean">Not strict in the way you punish someone or in the standard you expect.</td></tr>
+            <tr><td class="word">Guarantee</td><td class="ar-trans">يضمن / ضمان</td><td class="ar-mean">الوعد بفعل شيء أو بأن شيئاً ما سيحدث</td><td class="en-mean">To promise to do something or to promise that something will happen.</td></tr>
+            <tr><td class="word">Incapable</td><td class="ar-trans">عاجز / غير قادر</td><td class="ar-mean">غير قادر على فعل شيء ما</td><td class="en-mean">Not able to do something.</td></tr>
+            <tr><td class="word">Distinguish</td><td class="ar-trans">يميّز / يفرّق</td><td class="ar-mean">التعرف على الفرق بين شيئين أو أكثر وفهمه</td><td class="en-mean">To recognize and understand the difference between two or more things or people.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="unit" id="u4">
+      <div class="unit-card">
+        <div class="unit-head">
+          <span class="pill">الوحدة ٤</span>
+          <div><h3>العلاقة بين الآباء والأبناء (٢)<span class="en">Parent-Child Relationship 2</span></h3></div>
+          <span class="count">١٠ كلمات</span>
+        </div>
+        <table>
+          <thead><tr><th class="en-col">Word</th><th>الترجمة</th><th>المعنى بالعربي</th><th class="en-col">English Meaning</th></tr></thead>
+          <tbody>
+            <tr><td class="word">Emphasize</td><td class="ar-trans">يؤكّد / يشدّد</td><td class="ar-mean">قول شيء بطريقة قوية</td><td class="en-mean">To say something in a strong way.</td></tr>
+            <tr><td class="word">Neglect</td><td class="ar-trans">يُهمل</td><td class="ar-mean">الفشل في رعاية شخص أو شيء بشكل صحيح</td><td class="en-mean">To fail to look after someone or something properly.</td></tr>
+            <tr><td class="word">Crisis</td><td class="ar-trans">أزمة</td><td class="ar-mean">موقف به مشكلات كثيرة يجب معالجتها بسرعة كي لا تسوء</td><td class="en-mean">A situation with many problems that must be dealt with quickly so it doesn't get worse or more dangerous.</td></tr>
+            <tr><td class="word">Noble</td><td class="ar-trans">نبيل / كريم</td><td class="ar-mean">حَسَن الخُلق أو سخيّ بطريقة محل إعجاب</td><td class="en-mean">Morally good or generous in a way that is admired.</td></tr>
+            <tr><td class="word">Aged</td><td class="ar-trans">مُسنّ / طاعن في السن</td><td class="ar-mean">كبير جداً في السن</td><td class="en-mean">Very old.</td></tr>
+            <tr><td class="word">Waste</td><td class="ar-trans">يُبدّد / يُضيّع</td><td class="ar-mean">استخدام مال أو وقت أو طاقة أكثر مما هو مفيد أو معقول</td><td class="en-mean">To use more money, time, energy, etc. than is useful or sensible.</td></tr>
+            <tr><td class="word">Meaningful</td><td class="ar-trans">ذو معنى / مُجدٍ</td><td class="ar-mean">جادّ أو مهم أو مفيد</td><td class="en-mean">Serious, important, or useful.</td></tr>
+            <tr><td class="word">Complaint</td><td class="ar-trans">شكوى</td><td class="ar-mean">عبارة يشتكي فيها شخص من شيء ما</td><td class="en-mean">A statement in which someone complains about something.</td></tr>
+            <tr><td class="word">Resentment</td><td class="ar-trans">استياء / امتعاض</td><td class="ar-mean">شعور بالغضب بسبب حدوث ما تراه ظالماً</td><td class="en-mean">A feeling of anger because something unfair has happened.</td></tr>
+            <tr><td class="word">Gratitude</td><td class="ar-trans">امتنان / عرفان</td><td class="ar-mean">الشعور بالامتنان</td><td class="en-mean">The feeling of being grateful.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="unit" id="u5">
+      <div class="unit-card">
+        <div class="unit-head">
+          <span class="pill">الوحدة ٥</span>
+          <div><h3>الميراث في الإسلام<span class="en">Inheritance in Islam</span></h3></div>
+          <span class="count">١١ كلمة</span>
+        </div>
+        <table>
+          <thead><tr><th class="en-col">Word</th><th>الترجمة</th><th>المعنى بالعربي</th><th class="en-col">English Meaning</th></tr></thead>
+          <tbody>
+            <tr><td class="word">Carry something out</td><td class="ar-trans">يُنفّذ</td><td class="ar-mean">القيام بشيء يحتاج إلى تنظيم وتخطيط</td><td class="en-mean">To do something that needs to be organized and planned.</td></tr>
+            <tr><td class="word">Justice</td><td class="ar-trans">عدل / عدالة</td><td class="ar-mean">الإنصاف في معاملة الناس</td><td class="en-mean">Fairness in the way people are treated.</td></tr>
+            <tr><td class="word">Permission</td><td class="ar-trans">إذن / تصريح</td><td class="ar-mean">أن يُسمح لك رسمياً بفعل شيء ما</td><td class="en-mean">If you have permission to do something, you are officially allowed to do it.</td></tr>
+            <tr><td class="word">Deceased</td><td class="ar-trans">المُتوفّى</td><td class="ar-mean">الشخص الذي مات</td><td class="en-mean">The deceased is the person who has died.</td></tr>
+            <tr><td class="word">Heir</td><td class="ar-trans">وارِث</td><td class="ar-mean">من له الحق القانوني في تلقّي ممتلكات شخص آخر</td><td class="en-mean">The person who has the legal right to receive the property of another person.</td></tr>
+            <tr><td class="word">Inherit</td><td class="ar-trans">يَرِث</td><td class="ar-mean">تلقّي مال أو ممتلكات من شخص بعد وفاته</td><td class="en-mean">To receive money, property, etc. from someone after they have died.</td></tr>
+            <tr><td class="word">Distribute</td><td class="ar-trans">يوزّع</td><td class="ar-mean">تقاسم الأشياء بين مجموعة من الناس، خاصة بطريقة مُخطَّطة</td><td class="en-mean">To share things among a group of people, especially in a planned way.</td></tr>
+            <tr><td class="word">Beneficiary</td><td class="ar-trans">مُستفيد</td><td class="ar-mean">من يحصل على منافع من فعل أو تغيير</td><td class="en-mean">Someone who gets advantages from an action or change.</td></tr>
+            <tr><td class="word">Deprive somebody of something</td><td class="ar-trans">يَحرِم (شخصاً من شيء)</td><td class="ar-mean">منع شخص من امتلاك شيء يحتاجه أو يستحقه</td><td class="en-mean">To prevent someone from having something, especially something they need or should have.</td></tr>
+            <tr><td class="word">Grudge</td><td class="ar-trans">ضغينة / حقد</td><td class="ar-mean">شعور بالكراهية لأنك لا تنسى أن شخصاً أذاك في الماضي</td><td class="en-mean">A feeling of dislike for someone because you cannot forget that they harmed you in the past.</td></tr>
+            <tr><td class="word">Estate</td><td class="ar-trans">تَرِكة / ممتلكات</td><td class="ar-mean">جميع الأموال والممتلكات التي يتركها الشخص</td><td class="en-mean">All the money and property that a person leaves behind (as used in the inheritance text).</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="unit" id="u19">
+      <div class="unit-card">
+        <div class="unit-head">
+          <span class="pill">الوحدة ١٩</span>
+          <div><h3>سيبويه<span class="en">Sibawayh</span></h3></div>
+          <span class="count">٦ كلمات</span>
+        </div>
+        <table>
+          <thead><tr><th class="en-col">Word</th><th>الترجمة</th><th>المعنى بالعربي</th><th class="en-col">English Meaning</th></tr></thead>
+          <tbody>
+            <tr><td class="word">Author</td><td class="ar-trans">مؤلِّف</td><td class="ar-mean">كاتب الكتاب أو المقال أو المسرحية</td><td class="en-mean">The writer of a book, article, or play.</td></tr>
+            <tr><td class="word">Genius</td><td class="ar-trans">عبقري / عبقرية</td><td class="ar-mean">قدرة أو مهارة طبيعية عظيمة ونادرة، خاصة في مجال كالعلم أو الفن، أو شخص يمتلكها</td><td class="en-mean">Very great and rare natural ability or skill, especially in an area such as science or art, or a person who has this.</td></tr>
+            <tr><td class="word">Prominent</td><td class="ar-trans">بارز / مشهور</td><td class="ar-mean">معروف ومهم جداً</td><td class="en-mean">Very well known and important.</td></tr>
+            <tr><td class="word">Comprehensive</td><td class="ar-trans">شامل</td><td class="ar-mean">كامل ويتضمّن كل ما هو ضروري</td><td class="en-mean">Complete and including everything that is necessary.</td></tr>
+            <tr><td class="word">Bedouins</td><td class="ar-trans">البَدْو</td><td class="ar-mean">أفراد من شعب عربي يعيش في الصحراء أو قربها</td><td class="en-mean">Members of an Arab people living in or near the desert.</td></tr>
+            <tr><td class="word">Poetry</td><td class="ar-trans">الشِّعر</td><td class="ar-mean">أدب يثير وعياً تخيّلياً مركّزاً بالتجربة عبر لغة مختارة لمعناها وصوتها وإيقاعها</td><td class="en-mean">Literature that evokes a concentrated imaginative awareness of experience through language chosen for its meaning, sound, and rhythm.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      <div class="mark">ع</div>
+      <div>٥٧ كلمة · الوحدات ١–٥ (الدراسات الإسلامية) + الوحدة ١٩ (سيبويه)</div>
+      <div>المصدر: مقرر اللغة الإنجليزية — جامعة الأزهر</div>
+    </footer>
+
+  </div>
+
+<script>
+  const search = document.getElementById('search');
+  const rows = Array.from(document.querySelectorAll('tbody tr'));
+  const sections = Array.from(document.querySelectorAll('section.unit'));
+  const noresult = document.getElementById('noresult');
+  search.addEventListener('input', function(){
+    const q = this.value.trim().toLowerCase();
+    let anyVisible = false;
+    rows.forEach(r=>{
+      const match = r.textContent.toLowerCase().includes(q);
+      r.style.display = match ? '' : 'none';
+      if(match) anyVisible = true;
+    });
+    sections.forEach(s=>{
+      const visible = s.querySelectorAll('tbody tr:not([style*="display: none"])').length;
+      s.style.display = visible ? '' : 'none';
+    });
+    noresult.style.display = anyVisible ? 'none' : 'block';
+  });
+</script>
+</body>
+</html>
