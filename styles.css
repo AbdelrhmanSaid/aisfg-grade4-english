@@ -45,9 +45,10 @@
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-html, body { height: 100%; }
+/* NOTE: no height:100% on html/body — it makes <html> the scroller and breaks
+   position:sticky on the mobile top bar. The page scrolls naturally instead. */
 body {
-  margin: 0;
+  margin: 0; min-height: 100%;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--ff-en-ui);
@@ -67,8 +68,8 @@ img, svg { max-width: 100%; }
 .topbar {
   position: sticky; top: 0; z-index: 40;
   display: flex; align-items: center; gap: 12px;
-  height: var(--topbar-h);
-  padding: 0 14px; padding-top: env(safe-area-inset-top, 0);
+  height: calc(var(--topbar-h) + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) 14px 0;
   background: var(--card); border-bottom: 1px solid var(--line);
 }
 .topbar-seal {
@@ -199,7 +200,7 @@ img, svg { max-width: 100%; }
 
 /* tabs (sticky under top bar on mobile) */
 .tabs {
-  position: sticky; top: var(--topbar-h); z-index: 20;
+  position: sticky; top: calc(var(--topbar-h) + env(safe-area-inset-top, 0px)); z-index: 20;
   display: flex; gap: 2px; padding: 0 8px;
   background: var(--paper); border-bottom: 1px solid var(--line);
   overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
