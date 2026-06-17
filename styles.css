@@ -37,6 +37,7 @@
 
   --maxread: 68ch;
   --topbar-h: 58px;
+  --site-nav-h: 46px;
   --sidebar-w: 300px;
 
   /* responsive paddings (overridden at breakpoints) */
@@ -138,6 +139,31 @@ img, svg { max-width: 100%; }
 .progress-block .bar > span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--emerald), #3da88f); border-radius: 99px; transition: width .5s cubic-bezier(.2,.7,.2,1); }
 .progress-block .ar { font-size: 12px; color: var(--ink-soft); }
 
+.site-nav {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin: 0 4px 18px;
+}
+.site-nav a {
+  flex: 1 1 0; min-width: 0; text-align: center; white-space: nowrap;
+  font-family: var(--ff-ar-body); font-size: 12.5px; text-decoration: none; color: var(--ink-soft);
+  border: 1px solid var(--line); border-radius: 8px; padding: 7px 8px; background: var(--card);
+  transition: background .15s, color .15s, border-color .15s;
+}
+.site-nav a.active,
+.site-nav a:hover { background: var(--emerald); color: #fff; border-color: var(--emerald); }
+
+/* mobile/tablet: sticky bar under topbar */
+.site-nav--mobile {
+  position: sticky;
+  top: calc(var(--topbar-h) + env(safe-area-inset-top, 0px));
+  z-index: 35;
+  margin: 0;
+  padding: 8px 14px;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+.sidebar .site-nav { display: none; }
+
 .nav-group { margin-bottom: 4px; }
 .group-title {
   display: flex; align-items: center; gap: 8px;
@@ -204,6 +230,9 @@ img, svg { max-width: 100%; }
   display: flex; gap: 2px; padding: 0 8px;
   background: var(--paper); border-bottom: 1px solid var(--line);
   overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.site-nav--mobile ~ .app .tabs {
+  top: calc(var(--topbar-h) + var(--site-nav-h) + env(safe-area-inset-top, 0px));
 }
 .tabs::-webkit-scrollbar { display: none; }
 .tab {
@@ -370,6 +399,8 @@ img, svg { max-width: 100%; }
    ============================================================ */
 @media (min-width: 1000px) {
   .topbar { display: none; }
+  .site-nav--mobile { display: none; }
+  .sidebar .site-nav { display: flex; }
   .scrim { display: none !important; }
   body.nav-open { overflow: auto; }
   [dir="rtl"] .hero { background: radial-gradient(640px 200px at 12% -40%, var(--emerald-t), transparent 70%), var(--paper); }

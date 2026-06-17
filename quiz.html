@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0E6E5C" />
+  <title>أسئلة القواعد والمفردات — English for Non-Specialists · الفرقة الرابعة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet" />
+  <!-- Shared design system from index.html -->
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ===== standalone page chrome (shares tokens from styles.css) ===== */
+    .sitebar{
+      position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:12px;
+      padding:calc(env(safe-area-inset-top,0px) + 10px) var(--gut) 10px;
+      background:var(--card);border-bottom:1px solid var(--line);
+    }
+    .sitebar .seal{
+      width:34px;height:34px;flex:none;border-radius:9px;
+      background:linear-gradient(150deg,var(--emerald),var(--emerald-d));color:#fff;
+      display:grid;place-items:center;font-family:var(--ff-ar-display);font-size:19px;font-weight:700;
+    }
+    .sitebar .ttl{min-width:0;}
+    .sitebar h1{font-family:var(--ff-en-display);font-size:16px;font-weight:600;margin:0;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .sitebar h1 small{display:block;font-family:var(--ff-ar-body);font-size:11px;color:var(--muted);font-weight:400;}
+    .sitebar nav{margin-inline-start:auto;display:flex;gap:6px;flex:none;}
+    .sitebar nav a{font-family:var(--ff-ar-body);font-size:12.5px;text-decoration:none;color:var(--ink-soft);
+      border:1px solid var(--line);border-radius:8px;padding:7px 11px;background:var(--paper);white-space:nowrap;}
+    .sitebar nav a.active,.sitebar nav a:hover{background:var(--emerald);color:#fff;border-color:var(--emerald);}
+
+    .page{max-width:820px;margin:0 auto;padding:0 var(--gut) 90px;}
+
+    .page-hero{text-align:center;padding:30px 0 6px;}
+    .page-hero .eyebrow{justify-content:center;}
+    .page-hero h2{font-family:var(--ff-en-display);font-weight:500;font-size:28px;margin:0 0 8px;color:var(--ink);letter-spacing:-.015em;}
+    .page-hero .ar-title{font-family:var(--ff-ar-display);color:var(--emerald-d);font-weight:700;font-size:20px;margin:0 0 10px;}
+    .page-hero p{font-family:var(--ff-ar-body);color:var(--muted);font-size:14px;max-width:560px;margin:0 auto;}
+
+    /* filter chips */
+    .chips{display:flex;flex-wrap:nowrap;gap:8px;margin:18px 0 6px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    .chips::-webkit-scrollbar{display:none;}
+    .chips button{
+      appearance:none;cursor:pointer;white-space:nowrap;flex:0 0 auto;
+      font-family:var(--ff-ar-body);font-size:13px;font-weight:600;color:var(--ink-soft);
+      background:var(--card);border:1px solid var(--line);padding:9px 14px;border-radius:999px;transition:.15s;
+    }
+    .chips button .n{font-family:var(--ff-en-ui);font-size:11px;color:var(--muted);margin-inline-start:5px;}
+    .chips button:hover{border-color:var(--emerald);color:var(--emerald-d);}
+    .chips button.active{background:var(--emerald);color:#fff;border-color:var(--emerald);}
+    .chips button.active .n{color:rgba(255,255,255,.8);}
+
+    /* score / progress bar (reuses practice-bar look) */
+    .scorebar .bar{height:7px;margin-top:10px;background:var(--paper-2);border-radius:99px;overflow:hidden;}
+    .scorebar .bar>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--emerald),#3da88f);border-radius:99px;transition:width .4s cubic-bezier(.2,.7,.2,1);}
+
+    @media (min-width:640px){ .page-hero h2{font-size:34px;} .sitebar h1{font-size:17px;} }
+  </style>
+</head>
+<body>
+
+  <header class="sitebar">
+    <div class="seal">ع</div>
+    <div class="ttl">
+      <h1>English Course<small>Al-Azhar University · الفرقة الرابعة</small></h1>
+    </div>
+    <nav>
+      <a href="index.html">الدروس</a>
+      <a href="quiz.html" class="active">الأسئلة</a>
+      <a href="vocab.html">المفردات</a>
+    </nav>
+  </header>
+
+  <div class="page">
+
+    <header class="page-hero">
+      <span class="eyebrow"><span class="dot"></span>بنك أسئلة تفاعلي</span>
+      <h2>Grammar &amp; Vocabulary Practice</h2>
+      <div class="ar-title">أسئلة القواعد والمفردات</div>
+      <p>أكثر من ١٤٠ سؤالاً على القواعد (المبني للمجهول والكلام المنقول) والمفردات. اختَر الإجابة لتظهر لك التصحيح والشرح فوراً.</p>
+    </header>
+
+    <div class="chips" id="chips"></div>
+
+    <div class="practice-bar scorebar">
+      <div class="ar">تابع تقدّمك — كل إجابة تُصحَّح وتُشرَح فوراً.</div>
+      <div class="score" style="font-family:var(--ff-ar-body);" id="score">٠ / ٠ صح</div>
+      <button class="btn-reset" id="reset">إعادة التعيين</button>
+      <div class="bar" style="flex:1 1 100%"><span id="bar"></span></div>
+    </div>
+
+    <div class="practice" id="list"></div>
+  </div>
+
+<script>
+/* ============================================================
+   Question bank — grammar (priority) + vocabulary
+   from data.md (Fourth Year). Each: {g group, t badge, q, o[], a, r}
+   "~" in q = blank.   g: passive | reported | vocab
+   ============================================================ */
+const Q = [
+  /* ---------- PASSIVE · present & past simple ---------- */
+  {g:"passive",t:"Passive — مضارع/ماضٍ بسيط",q:"Cheese ~ from milk.",o:["makes","is made","was made"],a:1,r:`مضارع بسيط مبني للمجهول لحقيقة عامة: <span class="en">is/are + p.p.</span> — الجبنة بتتعمل من اللبن.`},
+  {g:"passive",t:"Passive — مضارع/ماضٍ بسيط",q:"Many accidents ~ by careless driving.",o:["cause","are caused","caused"],a:1,r:`جمع + حقيقة عامة → <span class="en">are caused</span>.`},
+  {g:"passive",t:"Passive — مضارع/ماضٍ بسيط",q:"The roof of the building ~ in a storm a few days ago.",o:["damaged","was damaged","is damaged"],a:1,r:`زمن ماضٍ (<span class="en">a few days ago</span>) مبني للمجهول → <span class="en">was damaged</span>.`},
+  {g:"passive",t:"Passive — مضارع/ماضٍ بسيط",q:"A cinema is a place where films ~.",o:["show","are shown","were shown"],a:1,r:`الأفلام بتتعرض — مضارع مبني للمجهول → <span class="en">are shown</span>.`},
+  {g:"passive",t:"Passive — مضارع/ماضٍ بسيط",q:"You ~ to the party. Why didn't you go?",o:["invited","were invited","are invited"],a:1,r:`الدعوة حصلت في الماضي → <span class="en">were invited</span>.`},
+  {g:"passive",t:"Passive — مضارع/ماضٍ بسيط",q:"This plant is very rare. It ~ in very few places.",o:["finds","is found","was found"],a:1,r:`حقيقة حالية دايمة → <span class="en">is found</span>.`},
+  {g:"passive",t:"Passive — مضارع/ماضٍ بسيط",q:"Although we were driving fast, we ~ by a lot of other cars.",o:["overtook","were overtaken","are overtaken"],a:1,r:`ماضٍ مبني للمجهول → <span class="en">were overtaken</span>.`},
+  {g:"passive",t:"Passive — مضارع/ماضٍ بسيط",q:"In the US, elections for president ~ every four years.",o:["are held","were held","hold"],a:0,r:`عادة متكررة → مضارع مبني للمجهول <span class="en">are held</span>.`},
+  {g:"passive",t:"Passive — مضارع/ماضٍ بسيط",q:"There was an accident last night, but fortunately nobody ~.",o:["injured","was injured","is injured"],a:1,r:`ماضٍ مبني للمجهول → <span class="en">was injured</span>.`},
+  {g:"passive",t:"Passive — مضارع/ماضٍ بسيط",q:"You can't see the house from the road. It ~ by trees.",o:["surrounds","is surrounded","was surrounded"],a:1,r:`حالة حالية دايمة → <span class="en">is surrounded</span>.`},
+  {g:"passive",t:"Passive — مضارع/ماضٍ بسيط",q:"I never received the letter. It ~ to the wrong address.",o:["sent","was sent","is sent"],a:1,r:`الجواب اتبعت للعنوان الغلط (ماضٍ) → <span class="en">was sent</span>.`},
+  {g:"passive",t:"Passive — مضارع/ماضٍ بسيط",q:"The company I work for ~ by a much larger company.",o:["owns","is owned","was owned"],a:1,r:`حالة حالية → <span class="en">is owned</span>.`},
+  {g:"passive",t:"Passive — معلوم أم مجهول؟",q:"Water ~ most of the earth's surface.",o:["covers","is covered","is covering"],a:0,r:`هنا الفعل مبني للمعلوم — المياه بتغطي. <span class="en">covers</span> (active).`},
+  {g:"passive",t:"Passive — معلوم أم مجهول؟",q:"How much of the earth's surface ~ by water?",o:["covers","is covered","covered"],a:1,r:`مع <span class="en">by water</span> → مبني للمجهول <span class="en">is covered</span>.`},
+  {g:"passive",t:"Passive — معلوم أم مجهول؟",q:"While I was on holiday, my camera ~ from my hotel room.",o:["stole","was stolen","has stolen"],a:1,r:`حد سرقها → مبني للمجهول <span class="en">was stolen</span>.`},
+  {g:"passive",t:"Passive — معلوم أم مجهول؟",q:"While I was on holiday, my camera ~ from my hotel room.",o:["was disappeared","disappeared","is disappeared"],a:1,r:`<span class="en">disappear</span> فعل لازم مايتحطّش مبني للمجهول → <span class="en">disappeared</span>.`},
+  {g:"passive",t:"Passive — معلوم أم مجهول؟",q:"Robert's parents ~ when he was very young.",o:["were died","died","were dead"],a:1,r:`<span class="en">die</span> فعل لازم → ماضٍ بسيط <span class="en">died</span>.`},
+  {g:"passive",t:"Passive — معلوم أم مجهول؟",q:"Robert and his sister ~ by their grandparents.",o:["brought up","were brought up","are brought up"],a:1,r:`اتربّوا في الماضي → <span class="en">were brought up</span>.`},
+  {g:"passive",t:"Passive — معلوم أم مجهول؟",q:"The boat hit a rock and ~ quickly.",o:["was sunk","sank","is sunk"],a:1,r:`<span class="en">sink</span> هنا لازم بمعنى غرق → <span class="en">sank</span>.`},
+  {g:"passive",t:"Passive — معلوم أم مجهول؟",q:"Fortunately everybody ~.",o:["rescued","was rescued","rescue"],a:1,r:`اتنقذوا → مبني للمجهول <span class="en">was rescued</span>.`},
+
+  /* ---------- PASSIVE · more tenses (modals/infinitive) ---------- */
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"The situation is serious. Something must ~ before it's too late.",o:["be done","been done","do"],a:0,r:`بعد <span class="en">modal</span>: <span class="en">must be + p.p.</span>.`},
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"I haven't received the letter yet. It might ~ to the wrong address.",o:["be sent","have been sent","been sent"],a:1,r:`احتمال في الماضي → <span class="en">might have been + p.p.</span>.`},
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"A decision will not ~ until the next meeting.",o:["be made","been made","be make"],a:0,r:`<span class="en">will (not) be + p.p.</span>.`},
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"These documents are important. They should always ~ in a safe place.",o:["be kept","been kept","keep"],a:0,r:`<span class="en">should be + p.p.</span>.`},
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"This road is in bad condition. It should ~ a long time ago.",o:["be repaired","have been repaired","repaired"],a:1,r:`كان لازم يتصلّح زمان → <span class="en">should have been + p.p.</span>.`},
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"The injured man couldn't walk and had to ~.",o:["be carried","carried","been carried"],a:0,r:`<span class="en">had to be + p.p.</span>.`},
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"If you hadn't shouted at the policeman, you wouldn't ~.",o:["be arrested","have been arrested","arrested"],a:1,r:`شرط مستحيل في الماضي → <span class="en">wouldn't have been + p.p.</span>.`},
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"It's not certain how the fire started. It might ~ by an electrical fault.",o:["be caused","have been caused","caused"],a:1,r:`احتمال في الماضي → <span class="en">might have been caused</span>.`},
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"A new school is being built. The old one is going to ~ down.",o:["be knocked","been knocked","knock"],a:0,r:`<span class="en">be going to be + p.p.</span>.`},
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"The election is next Sunday. The full results will ~ on Tuesday.",o:["be known","been known","know"],a:0,r:`<span class="en">will be + p.p.</span>.`},
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"A mystery is something that can't ~.",o:["be explained","explained","been explained"],a:0,r:`<span class="en">can't be + p.p.</span>.`},
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"The music was very loud and could ~ from a long way away.",o:["heard","be heard","been heard"],a:1,r:`<span class="en">could be + p.p.</span>.`},
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"A new supermarket is going ~ next year.",o:["to build","to be built","be built"],a:1,r:`<span class="en">going to be built</span>.`},
+  {g:"passive",t:"Passive — أزمنة أخرى",q:"Please go away. I want ~ alone.",o:["to leave","to be left","left"],a:1,r:`مصدر مبني للمجهول → <span class="en">to be left</span>.`},
+
+  /* ---------- PASSIVE · perfect & continuous + transformation ---------- */
+  {g:"passive",t:"Passive — تام/مستمر",q:"They are building a new road. → A new road ~ around the city.",o:["is built","is being built","was being built"],a:1,r:`مضارع مستمر مبني للمجهول → <span class="en">is being built</span>.`},
+  {g:"passive",t:"Passive — تام/مستمر",q:"They have built two new hotels. → Two new hotels ~ near the airport.",o:["have built","have been built","had been built"],a:1,r:`مضارع تام مبني للمجهول → <span class="en">have been built</span>.`},
+  {g:"passive",t:"Passive — تام/مستمر",q:"When I last visited, they were building some houses. → … some new houses ~.",o:["were being built","are being built","were built"],a:0,r:`ماضٍ مستمر مبني للمجهول → <span class="en">were being built</span>.`},
+  {g:"passive",t:"Passive — تام/مستمر",q:"Somebody has cleaned the room. → The room ~.",o:["was cleaned","has been cleaned","is cleaned"],a:1,r:`مضارع تام مبني للمجهول → <span class="en">has been cleaned</span>.`},
+  {g:"passive",t:"Passive — تام/مستمر",q:"Have you heard? The trip ~.",o:["has been cancelled","was cancelling","is cancel"],a:0,r:`مضارع تام مبني للمجهول → <span class="en">has been cancelled</span>.`},
+  {g:"passive",t:"Passive — تام/مستمر",q:"Have you ever ~ by a dog?",o:["been bitten","bitten","being bitten"],a:0,r:`مضارع تام مبني للمجهول → <span class="en">been bitten</span>.`},
+  {g:"passive",t:"Passive — تام/مستمر",q:"The vegetables didn't taste good. They ~ too long.",o:["have been cooked","had been cooked","were cooking"],a:1,r:`ماضٍ تام مبني للمجهول → <span class="en">had been cooked</span>.`},
+  {g:"passive",t:"Passive — تام/مستمر",q:"There's somebody walking behind us. I think we ~.",o:["are followed","are being followed","were being followed"],a:1,r:`بيحصل دلوقتي → مضارع مستمر مجهول <span class="en">are being followed</span>.`},
+  {g:"passive",t:"Passive — تام/مستمر",q:"A new bridge ~ across the river. It will be finished next year.",o:["is being built","was being built","has been built"],a:0,r:`شغّال دلوقتي → <span class="en">is being built</span>.`},
+  {g:"passive",t:"Passive — تام/مستمر",q:"The room ~ when I arrived.",o:["is being cleaned","was being cleaned","was cleaned"],a:1,r:`كان بيتنضّف وقت ما وصلت → <span class="en">was being cleaned</span>.`},
+
+  /* ---------- PASSIVE · two objects / being / born / get ---------- */
+  {g:"passive",t:"Passive — صيغ خاصة",q:"Somebody has offered me the job. → I ~ the job.",o:["was offered","have been offered","am offered"],a:1,r:`مع فعلين الأفضل نبدأ بالشخص: <span class="en">have been offered</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"Steve hates ~ waiting.",o:["being kept","been kept","to keep"],a:0,r:`مصدر -ing مبني للمجهول → <span class="en">being kept</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"I remember ~ to the zoo when I was a child.",o:["being taken","been taken","to take"],a:0,r:`= حد خدني → <span class="en">being taken</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"We climbed over the wall without ~.",o:["being seen","seen","to be seen"],a:0,r:`بعد <span class="en">without</span> → <span class="en">being seen</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"I ~ in Chicago.",o:["am born","was born","was borned"],a:1,r:`بنقول دايمًا <span class="en">was born</span> مش <span class="en">am born</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"~ you born?",o:["Where are","Where were","Where was"],a:1,r:`<span class="en">Where were you born?</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"How many babies ~ every day?",o:["are born","were born","born"],a:0,r:`حقيقة حالية → <span class="en">are born</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"There was a fight, but nobody ~.",o:["got hurt","got hurted","was hurting"],a:0,r:`<span class="en">get</span> للمجهول في الكلام العادي → <span class="en">got hurt</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"I don't ~ to many parties.",o:["get invited","got invited","get invite"],a:0,r:`= مش بتتدعى كتير → <span class="en">get invited</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"I like giving presents and I also like ~ them.",o:["being given","been given","give"],a:0,r:`بحب إن حد يديني هدايا → <span class="en">being given</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"How do you avoid ~ by mosquitoes?",o:["being bitten","been bitten","to bite"],a:0,r:`بعد <span class="en">avoid</span> → <span class="en">being bitten</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"I'm an adult. I don't like ~ like a child.",o:["being treated","been treated","treated"],a:0,r:`<span class="en">being treated</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"Alex ~ by a bee while he was sitting in the garden.",o:["got stung","got stinged","was sting"],a:0,r:`حدث مفاجئ → <span class="en">got stung</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"I used to have a bike, but it ~ a few months ago.",o:["got stolen","got stealed","was stealing"],a:0,r:`= اتسرقت → <span class="en">got stolen</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"Rachel works hard, but she doesn't ~ very much.",o:["get paid","gets paid","got paid"],a:0,r:`مع <span class="en">doesn't</span> الفعل أساسي → <span class="en">get paid</span>.`},
+  {g:"passive",t:"Passive — صيغ خاصة",q:"Last night I ~ by the police as I was driving home.",o:["got stopped","get stopped","was stopping"],a:0,r:`ماضٍ → <span class="en">got stopped</span>.`},
+
+  /* ---------- GRAMMAR · general passive rules ---------- */
+  {g:"passive",t:"Grammar — قواعد عامة",q:"Which verb CANNOT be used in the passive?",o:["build","clean","happen"],a:2,r:`<span class="en">happen</span> فعل لازم؛ مفيش مفعول يبقى فاعل، فمايتحطّش مبني للمجهول.`},
+  {g:"passive",t:"Grammar — قواعد عامة",q:"The passive is formed with:",o:["be + past participle","have + past participle","be + -ing"],a:0,r:`صيغة المبني للمجهول = <span class="en">be + past participle</span>.`},
+  {g:"passive",t:"Grammar — قواعد عامة",q:"In the passive, the ___ of the active verb becomes the subject.",o:["object","adverb","subject"],a:0,r:`مفعول الجملة المعلومة بيبقى فاعل في المجهولة.`},
+  {g:"passive",t:"Grammar — قواعد عامة",q:"\"I was given this watch by my grandfather.\" Another correct passive: \"This watch ~ to me.\"",o:["was given","gave","is giving"],a:0,r:`الفعل بفعلين يقبل صيغتين → <span class="en">This watch was given to me</span>.`},
+  {g:"passive",t:"Grammar — قواعد عامة",q:"Which sentence is correct?",o:["I am born in 1990.","I was born in 1990.","I have born in 1990."],a:1,r:`دايمًا <span class="en">was/were born</span> عن الماضي.`},
+  {g:"passive",t:"Grammar — قواعد عامة",q:"We use \"get\" for the passive mainly in:",o:["formal writing","informal spoken English","academic essays"],a:1,r:`<span class="en">get</span> للمجهول بنستخدمه أكتر في الكلام غير الرسمي.`},
+
+  /* ---------- REPORTED SPEECH · tense changes ---------- */
+  {g:"reported",t:"Reported — تغيير الأزمنة",q:"In reported speech, \"am / is\" usually changes to:",o:["was","were","been"],a:0,r:`<span class="en">am/is → was</span>.`},
+  {g:"reported",t:"Reported — تغيير الأزمنة",q:"\"will\" changes to:",o:["would","will","should"],a:0,r:`<span class="en">will → would</span>.`},
+  {g:"reported",t:"Reported — تغيير الأزمنة",q:"\"can\" changes to:",o:["could","can","would"],a:0,r:`<span class="en">can → could</span>.`},
+  {g:"reported",t:"Reported — تغيير الأزمنة",q:"\"have / has\" changes to:",o:["had","has","having"],a:0,r:`<span class="en">have/has → had</span>.`},
+  {g:"reported",t:"Reported — تغيير الأزمنة",q:"\"I've lost my phone.\" → Anna said that she ~ her phone.",o:["has lost","had lost","lost"],a:1,r:`مضارع تام → ماضٍ تام <span class="en">had lost</span>.`},
+  {g:"reported",t:"Reported — تغيير الأزمنة",q:"\"I want to buy a car.\" → She said that she ~ to buy a car.",o:["wants","wanted","want"],a:1,r:`<span class="en">want → wanted</span>.`},
+  {g:"reported",t:"Reported — تغيير الأزمنة",q:"\"I can't come to the party.\" → She said that she ~ come.",o:["can't","couldn't","wouldn't"],a:1,r:`<span class="en">can't → couldn't</span>.`},
+  {g:"reported",t:"Reported — تغيير الأزمنة",q:"\"I don't have much free time.\" → She said that she ~ have much free time.",o:["doesn't","didn't","hadn't"],a:1,r:`<span class="en">don't → didn't</span>.`},
+  {g:"reported",t:"Reported — تغيير الأزمنة",q:"\"My parents are fine.\" → She said that her parents ~ fine.",o:["are","were","was"],a:1,r:`<span class="en">are → were</span>.`},
+  {g:"reported",t:"Reported — تغيير الأزمنة",q:"\"I'll phone you.\" → She said that she ~ phone me.",o:["will","would","would have"],a:1,r:`<span class="en">will → would</span>.`},
+  {g:"reported",t:"Reported — تغيير الأزمنة",q:"Paul said, \"I'm feeling ill.\" → Paul said that he ~ ill.",o:["is feeling","was feeling","feels"],a:1,r:`مضارع مستمر → ماضٍ مستمر <span class="en">was feeling</span>.`},
+  {g:"reported",t:"Reported — تغيير الأزمنة",q:"Paul said, \"I woke up feeling ill.\" → He said he ~ feeling ill.",o:["wakes up","woke up","had woke"],a:1,r:`الماضي البسيط ممكن يفضل زي ما هو → <span class="en">woke up</span> (أو <span class="en">had woken</span>).`},
+
+  /* ---------- REPORTED · say / tell / ask ---------- */
+  {g:"reported",t:"Reported — say / tell / ask",q:"Rachel ~ me that you were in hospital.",o:["said","told","say"],a:1,r:`لما نذكر الشخص نستخدم <span class="en">tell</span> → <span class="en">told me</span>.`},
+  {g:"reported",t:"Reported — say / tell / ask",q:"Rachel ~ that you were in hospital.",o:["said","told","telling"],a:0,r:`من غير مفعول نستخدم <span class="en">say</span> → <span class="en">said that</span>.`},
+  {g:"reported",t:"Reported — say / tell / ask",q:"What did you ~ to the police?",o:["say","tell","said"],a:0,r:`<span class="en">say something to somebody</span>.`},
+  {g:"reported",t:"Reported — say / tell / ask",q:"Anna ~ goodbye to me and left.",o:["told","said","say"],a:1,r:`<span class="en">said goodbye to me</span> (مش told).`},
+  {g:"reported",t:"Reported — say / tell / ask",q:"\"Drink plenty of water.\" → The doctor told me ~ plenty of water.",o:["drink","to drink","drinking"],a:1,r:`<span class="en">tell somebody to do</span> → <span class="en">to drink</span>.`},
+  {g:"reported",t:"Reported — say / tell / ask",q:"\"Don't work too hard.\" → I told Joe ~ too hard.",o:["not to work","to not work","don't work"],a:0,r:`النفي للأمر → <span class="en">told Joe not to work</span>.`},
+  {g:"reported",t:"Reported — say / tell / ask",q:"\"Can you help me, please?\" Jackie said. → Jackie ~ me to help her.",o:["said","asked","told"],a:1,r:`طلب مؤدّب → <span class="en">asked me to help</span>.`},
+  {g:"reported",t:"Reported — say / tell / ask",q:"Paul ~ not to worry about him.",o:["said","told","told me"],a:0,r:`<span class="en">said (not) to do</span> صح، إنما مش <span class="en">said me</span>.`},
+
+  /* ---------- REPORTED · questions ---------- */
+  {g:"reported",t:"Reported — الأسئلة",q:"\"Where are you going?\" → The officer asked us where we ~.",o:["are going","were going","was going"],a:1,r:`السؤال المنقول ترتيبه خبري والفعل بيرجع للماضي → <span class="en">where we were going</span>.`},
+  {g:"reported",t:"Reported — الأسئلة",q:"\"What time do the shops close?\" → She wanted to know what time the shops ~.",o:["close","closed","closes"],a:1,r:`<span class="en">close → closed</span>.`},
+  {g:"reported",t:"Reported — الأسئلة",q:"\"Are you willing to travel?\" → She asked ~ I was willing to travel.",o:["that","if","what"],a:1,r:`سؤال بـ yes/no → <span class="en">if / whether</span>.`},
+  {g:"reported",t:"Reported — الأسئلة",q:"\"How long have you been working here?\" → She asked how long I ~ working.",o:["have been","had been","was"],a:1,r:`<span class="en">have been → had been</span>.`},
+  {g:"reported",t:"Reported — الأسئلة",q:"\"Why did you apply for the job?\" → She asked why I ~ for the job.",o:["applied","had applied","apply"],a:1,r:`ممكن <span class="en">applied</span> أو الأنسب <span class="en">had applied</span>.`},
+  {g:"reported",t:"Reported — الأسئلة",q:"\"Can you speak any other languages?\" → She wanted to know if I ~ speak.",o:["can","could","would"],a:1,r:`<span class="en">can → could</span>.`},
+  {g:"reported",t:"Reported — الأسئلة",q:"\"Do you have a driving license?\" → She asked if I ~ a driving license.",o:["have","had","has"],a:1,r:`<span class="en">do you have → if I had</span>.`},
+  {g:"reported",t:"Reported — الأسئلة",q:"\"Where are you from?\" he asked. → He asked where I ~.",o:["am from","was from","were from"],a:1,r:`<span class="en">am → was</span>.`},
+  {g:"reported",t:"Reported — الأسئلة",q:"\"Have you been to London before?\" → They asked ~ I had been to London before.",o:["if","that","where"],a:0,r:`سؤال yes/no → <span class="en">if</span>.`},
+  {g:"reported",t:"Reported — الأسئلة",q:"\"Do you like London?\" → She asked if I ~ London.",o:["like","liked","am liking"],a:1,r:`<span class="en">like → liked</span>.`},
+  {g:"reported",t:"Reported — say / tell / ask",q:"~ us about your holiday. Did you have a nice time?",o:["Say","Tell","Said"],a:1,r:`فيه مفعول (us) → <span class="en">Tell us</span>.`},
+  {g:"reported",t:"Reported — say / tell / ask",q:"Don't just stand there! ~ something!",o:["Say","Tell","Told"],a:0,r:`من غير مفعول → <span class="en">Say something</span>.`},
+  {g:"reported",t:"Reported — say / tell / ask",q:"I wonder where Sue is. She ~ she would be here at 8 o'clock.",o:["told","said","say"],a:1,r:`من غير مفعول → <span class="en">said</span>.`},
+  {g:"reported",t:"Reported — say / tell / ask",q:"Dan ~ me that he was bored with his job.",o:["said","told","say"],a:1,r:`مع مفعول → <span class="en">told me</span>.`},
+  {g:"reported",t:"Reported — say / tell / ask",q:"The doctor ~ that I should rest for at least a week.",o:["said","told","told me"],a:0,r:`من غير مفعول → <span class="en">said that</span>.`},
+  {g:"reported",t:"Reported — say / tell / ask",q:"Gary couldn't help me. He ~ me to ask Chris.",o:["said","told","say"],a:1,r:`<span class="en">told me to ask</span>.`},
+
+  /* ---------- VOCABULARY · Unit 1 ---------- */
+  {g:"vocab",t:"Vocab — الوحدة ١",q:"The world is showing increasing ~. Countries depend on each other.",o:["interdependence","indifference","affection"],a:0,r:`<span class="en">interdependence</span> = الاعتماد المتبادل.`},
+  {g:"vocab",t:"Vocab — الوحدة ١",q:"He is in ~ trouble with the police. He is always in the station.",o:["constant","complementary","identical"],a:0,r:`<span class="en">constant</span> = مستمر/دائم.`},
+  {g:"vocab",t:"Vocab — الوحدة ١",q:"Treating people with ~ will make them hate you.",o:["affection","indifference","consultation"],a:1,r:`<span class="en">indifference</span> = لامبالاة.`},
+  {g:"vocab",t:"Vocab — الوحدة ١",q:"Soldiers wear ~ to protect themselves in wars.",o:["shields","cornerstones","consultations"],a:0,r:`<span class="en">shields</span> = دروع واقية.`},
+  {g:"vocab",t:"Vocab — الوحدة ١",q:"Hard work is the ~ of success.",o:["cornerstone","interdependence","indifference"],a:0,r:`<span class="en">cornerstone</span> = حجر الأساس.`},
+  {g:"vocab",t:"Vocab — الوحدة ١",q:"I've got two ~ blue dresses, so I'll give one to my sister.",o:["identical","tremendous","constant"],a:0,r:`<span class="en">identical</span> = متطابقتين.`},
+  {g:"vocab",t:"Vocab — الوحدة ١",q:"Children need lots of love and ~.",o:["affection","indifference","consultation"],a:0,r:`<span class="en">affection</span> = مودّة/حنان.`},
+
+  /* ---------- VOCABULARY · Unit 2 ---------- */
+  {g:"vocab",t:"Vocab — الوحدة ٢",q:"The police are the ~ of law and order.",o:["guardians","heirs","resorts"],a:0,r:`<span class="en">guardians</span> = حُرّاس/أولياء.`},
+  {g:"vocab",t:"Vocab — الوحدة ٢",q:"Her bad actions earned her the ~ of her colleagues.",o:["enmity","consent","reconciliation"],a:0,r:`<span class="en">enmity</span> = عداوة.`},
+  {g:"vocab",t:"Vocab — الوحدة ٢",q:"You can only come on the trip if your parents give their ~.",o:["consent","enmity","disruption"],a:0,r:`<span class="en">consent</span> = موافقة/إذن.`},
+  {g:"vocab",t:"Vocab — الوحدة ٢",q:"There is no reason or ~ for treating people badly.",o:["justification","reconciliation","resort"],a:0,r:`<span class="en">justification</span> = تبرير/مسوّغ.`},
+  {g:"vocab",t:"Vocab — الوحدة ٢",q:"It was unwise to ~ his offer. It was a very good job offer.",o:["reject","withdraw","consent"],a:0,r:`<span class="en">reject</span> = يرفض.`},
+  {g:"vocab",t:"Vocab — الوحدة ٢",q:"War should be regarded as a last ~, when all negotiations fail.",o:["resort","consent","enmity"],a:0,r:`<span class="en">last resort</span> = الملاذ الأخير.`},
+  {g:"vocab",t:"Vocab — الوحدة ٢",q:"Her ex-husband had always hoped for ~.",o:["reconciliation","disruption","enmity"],a:0,r:`<span class="en">reconciliation</span> = مصالحة.`},
+
+  /* ---------- VOCABULARY · Unit 3 ---------- */
+  {g:"vocab",t:"Vocab — الوحدة ٣",q:"Prisoners who behave well enjoy the special ~ of being released early.",o:["privilege","maturity","stability"],a:0,r:`<span class="en">privilege</span> = امتياز.`},
+  {g:"vocab",t:"Vocab — الوحدة ٣",q:"There has been ~ increase in prices; they didn't increase much.",o:["moderate","financial","lenient"],a:0,r:`<span class="en">moderate</span> = معتدل.`},
+  {g:"vocab",t:"Vocab — الوحدة ٣",q:"The media is sometimes ~ with female criminals; it shows more mercy.",o:["lenient","incapable","moderate"],a:0,r:`<span class="en">lenient</span> = متساهل.`},
+  {g:"vocab",t:"Vocab — الوحدة ٣",q:"She has shown greater ~ in her behavior this term; she became more sensible.",o:["maturity","stability","privilege"],a:0,r:`<span class="en">maturity</span> = نضج.`},
+  {g:"vocab",t:"Vocab — الوحدة ٣",q:"All religions do not ~ the use of violence.",o:["advocate","distinguish","guarantee"],a:0,r:`<span class="en">advocate</span> = يدعو إلى/يؤيّد.`},
+  {g:"vocab",t:"Vocab — الوحدة ٣",q:"We offer ~ assistance to students who cannot pay tuition.",o:["financial","moderate","lenient"],a:0,r:`<span class="en">financial</span> = مالي.`},
+  {g:"vocab",t:"Vocab — الوحدة ٣",q:"All our products come with a two-year ~.",o:["guarantee","privilege","maturity"],a:0,r:`<span class="en">guarantee</span> = ضمان.`},
+  {g:"vocab",t:"Vocab — الوحدة ٣",q:"It is important to ~ between cause and effect.",o:["distinguish","advocate","guarantee"],a:0,r:`<span class="en">distinguish</span> = يميّز/يفرّق.`},
+
+  /* ---------- VOCABULARY · Unit 4 ---------- */
+  {g:"vocab",t:"Vocab — الوحدة ٤",q:"Gratitude is the sign of ~ people.",o:["noble","aged","meaningful"],a:0,r:`<span class="en">noble</span> = نبيل/كريم.`},
+  {g:"vocab",t:"Vocab — الوحدة ٤",q:"I have a ~ about the food. It is too salty.",o:["complaint","resentment","gratitude"],a:0,r:`<span class="en">complaint</span> = شكوى.`},
+  {g:"vocab",t:"Vocab — الوحدة ٤",q:"You can use italics or bold to ~ a word in your paragraph.",o:["emphasize","neglect","waste"],a:0,r:`<span class="en">emphasize</span> = يؤكّد/يشدّد.`},
+  {g:"vocab",t:"Vocab — الوحدة ٤",q:"Tears of ~ filled her eyes; she was very thankful for their help.",o:["gratitude","resentment","complaint"],a:0,r:`<span class="en">gratitude</span> = امتنان.`},
+  {g:"vocab",t:"Vocab — الوحدة ٤",q:"Do not ~ your time playing video games.",o:["waste","emphasize","neglect"],a:0,r:`<span class="en">waste</span> = يُضيّع/يُبدّد.`},
+  {g:"vocab",t:"Vocab — الوحدة ٤",q:"He felt great ~ at not being accepted for the job.",o:["resentment","gratitude","complaint"],a:0,r:`<span class="en">resentment</span> = استياء/امتعاض.`},
+  {g:"vocab",t:"Vocab — الوحدة ٤",q:"One should not ~ his health; he should eat well and exercise.",o:["neglect","waste","emphasize"],a:0,r:`<span class="en">neglect</span> = يُهمل.`},
+
+  /* ---------- VOCABULARY · Unit 5 ---------- */
+  {g:"vocab",t:"Vocab — الوحدة ٥",q:"The soldiers ~ the orders without question.",o:["carried out","distributed","inherited"],a:0,r:`<span class="en">carried out</span> = نفّذوا.`},
+  {g:"vocab",t:"Vocab — الوحدة ٥",q:"The ~ general was a great soldier.",o:["deceased","beneficiary","heir"],a:0,r:`<span class="en">deceased</span> = المتوفّى.`},
+  {g:"vocab",t:"Vocab — الوحدة ٥",q:"Because of wars, many children are ~ education.",o:["deprived of","distributed","inherited"],a:0,r:`<span class="en">deprived of</span> = محرومون من.`},
+  {g:"vocab",t:"Vocab — الوحدة ٥",q:"Who will be the main ~ of the new policy?",o:["beneficiary","heir","grudge"],a:0,r:`<span class="en">beneficiary</span> = المستفيد.`},
+  {g:"vocab",t:"Vocab — الوحدة ٥",q:"She holds a ~ against me; she does not like me.",o:["grudge","justice","permission"],a:0,r:`<span class="en">grudge</span> = ضغينة/حقد.`},
+  {g:"vocab",t:"Vocab — الوحدة ٥",q:"I was granted ~ to visit the palace.",o:["permission","justice","grudge"],a:0,r:`<span class="en">permission</span> = إذن/تصريح.`},
+  {g:"vocab",t:"Vocab — الوحدة ٥",q:"He ~ a fortune from his grandmother.",o:["inherited","distributed","carried out"],a:0,r:`<span class="en">inherited</span> = وَرِث.`},
+  {g:"vocab",t:"Vocab — الوحدة ٥",q:"He distributed his possessions among his ~.",o:["heirs","grudges","resorts"],a:0,r:`<span class="en">heirs</span> = الورثة.`},
+
+  /* ---------- VOCABULARY · Unit 19 (Sibawayh) ---------- */
+  {g:"vocab",t:"Vocab — الوحدة ١٩",q:"Who is the ~ of this book?",o:["author","genius","poetry"],a:0,r:`<span class="en">author</span> = المؤلِّف.`},
+  {g:"vocab",t:"Vocab — الوحدة ١٩",q:"He was a ~; he mastered Arabic though it wasn't his mother tongue.",o:["genius","author","Bedouin"],a:0,r:`<span class="en">genius</span> = عبقري.`},
+  {g:"vocab",t:"Vocab — الوحدة ١٩",q:"He studied with two ~ grammarians in Basra.",o:["prominent","comprehensive","poetic"],a:0,r:`<span class="en">prominent</span> = بارزَين/مشهورَين.`},
+  {g:"vocab",t:"Vocab — الوحدة ١٩",q:"His book is a ~ treatment of Arabic grammar.",o:["comprehensive","prominent","genius"],a:0,r:`<span class="en">comprehensive</span> = شامل.`},
+  {g:"vocab",t:"Vocab — الوحدة ١٩",q:"He based his findings on the speech of the ~.",o:["Bedouins","authors","poems"],a:0,r:`<span class="en">Bedouins</span> = البَدْو.`},
+  {g:"vocab",t:"Vocab — الوحدة ١٩",q:"He relied on the Qur'an and early Arabic ~.",o:["poetry","genius","author"],a:0,r:`<span class="en">poetry</span> = الشِّعر.`}
+];
+
+/* ---------------- state ---------------- */
+Q.forEach((q,i)=>{ q.id=i; q.answered=false; q.chosen=-1; });
+let filter = "all";
+const BLANK = '<span class="blank">______</span>';
+const fmt = s => s.replace(/~/g, BLANK);
+
+const FILTERS = [
+  {k:"all",      label:"الكل"},
+  {k:"grammar",  label:"القواعد"},
+  {k:"passive",  label:"Passive — المبني للمجهول"},
+  {k:"reported", label:"Reported — الكلام المنقول"},
+  {k:"vocab",    label:"المفردات"}
+];
+const inFilter = (q,k) => k==="all" || q.g===k || (k==="grammar" && q.g!=="vocab");
+
+const listEl  = document.getElementById("list");
+const chipsEl = document.getElementById("chips");
+const scoreEl = document.getElementById("score");
+const barEl   = document.getElementById("bar");
+
+function choiceHTML(q){
+  return q.o.map((opt,ci)=>{
+    let cls="choice";
+    if(q.answered){
+      if(ci===q.a) cls+=" correct";
+      else if(ci===q.chosen) cls+=" wrong";
+    }
+    return `<button class="${cls}" ${q.answered?"disabled":""} onclick="answer(${q.id},${ci})">`
+         + `<span class="key">${"ABCD"[ci]}</span><span dir="auto">${opt}</span></button>`;
+  }).join("");
+}
+function qHTML(q,n){
+  let rat = "";
+  if(q.answered){
+    const ok = q.chosen===q.a;
+    rat = `<div class="rationale show ${ok?"ok":"no"}">`
+        + `<div class="verdict">${ok?"✓ إجابة صحيحة":"✗ إجابة غير صحيحة"}</div>${q.r}</div>`;
+  }
+  return `<div class="q" data-qid="${q.id}" data-n="${n}">`
+       + `<div class="q-top"><span class="q-num">${n}</span><span class="q-badge">${q.t}</span></div>`
+       + `<div class="q-prompt" dir="auto">${fmt(q.q)}</div>`
+       + `<div class="choices">${choiceHTML(q)}</div>${rat}</div>`;
+}
+function render(){
+  const list = Q.filter(q=>inFilter(q,filter));
+  listEl.innerHTML = list.length
+    ? list.map((q,i)=>qHTML(q,i+1)).join("")
+    : '<div class="empty">لا توجد أسئلة في هذا القسم.</div>';
+}
+function answer(qid,ci){
+  const q = Q[qid];
+  if(q.answered) return;
+  q.answered = true; q.chosen = ci;
+  const node = document.querySelector(`.q[data-qid="${qid}"]`);
+  node.outerHTML = qHTML(q, node.dataset.n);
+  updateScore();
+}
+function updateScore(){
+  const ans = Q.filter(q=>q.answered);
+  const cor = ans.filter(q=>q.chosen===q.a).length;
+  scoreEl.textContent = `${cor} / ${ans.length} صح · ${Q.length} إجمالي`;
+  barEl.style.width = (ans.length / Q.length * 100) + "%";
+}
+function renderChips(){
+  chipsEl.innerHTML = FILTERS.map(f=>{
+    const n = Q.filter(q=>inFilter(q,f.k)).length;
+    return `<button class="${f.k===filter?"active":""}" data-k="${f.k}">${f.label}<span class="n">${n}</span></button>`;
+  }).join("");
+}
+chipsEl.addEventListener("click", e=>{
+  const b = e.target.closest("button[data-k]");
+  if(!b) return;
+  filter = b.dataset.k;
+  renderChips(); render();
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+document.getElementById("reset").addEventListener("click", ()=>{
+  Q.forEach(q=>{ q.answered=false; q.chosen=-1; });
+  render(); updateScore();
+});
+
+renderChips();
+render();
+updateScore();
+</script>
+</body>
+</html>
