@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0E6E5C" />
+  <title>English for Non-Specialists — Al-Azhar · شرح تفاعلي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Mobile top bar (hidden on desktop) -->
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn" aria-label="افتح القائمة" aria-expanded="false" aria-controls="sidebar">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="topbar-seal">ع</div>
+    <div class="topbar-title" id="topbarTitle" dir="auto">English Course</div>
+  </header>
+
+  <div class="scrim" id="scrim" hidden></div>
+
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="seal">ع</div>
+        <div>
+          <h1>English Course</h1>
+          <p>Al-Azhar University · Fourth Year</p>
+        </div>
+        <button class="drawer-close" id="drawerClose" aria-label="اقفل القائمة">×</button>
+      </div>
+
+      <div class="progress-block">
+        <div class="pct"><span id="pctNum">0</span>%<small> مكتمل</small></div>
+        <div class="bar"><span id="overallBar"></span></div>
+        <div class="ar" id="overallText">—</div>
+      </div>
+
+      <nav id="nav"></nav>
+    </aside>
+
+    <main class="main">
+      <div class="main-inner" id="content">
+        <div class="empty">جاري تحميل المحتوى…</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
